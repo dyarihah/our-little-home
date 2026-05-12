@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Happy Birthday, Sayang 🤍</title>
+    <!-- Google Fonts: elegan & handwriting -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0c12;
+            font-family: 'Inter', sans-serif;
+            color: #ececf0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Night Sky + Stars Effect */
+        .night-sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 10%, #0b0e17, #03050a);
+            z-index: -2;
+        }
+
+        .stars-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 15% 30%, #fff, rgba(0, 0, 0, 0)),
+                radial-gradient(1px 1px at 75% 60%, #ffd9e2, rgba(0, 0, 0, 0)),
+                radial-gradient(3px 2px at 92% 20%, #fff, rgba(0, 0, 0, 0)),
+                radial-gradient(1px 1px at 5% 85%, #ffe0e7, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 45% 45%, #fff9f0, rgba(0, 0, 0, 0));
+            background-size: 250px 250px, 300px 300px, 200px 200px, 280px 280px, 400px 400px;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: starGlow 8s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes starGlow {
+            0% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Main Container */
+        .site-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.2rem 1.2rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Intro Page */
+        .intro-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(2px);
+            transition: opacity 1s ease;
+        }
+
+        .greeting-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #ffcddc;
+            text-shadow: 0 0 12px #ff8aa8;
+            margin-bottom: 2.2rem;
+            line-height: 1.3;
+            animation: softRise 1.2s ease;
+        }
+
+        @keyframes softRise {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-btn {
+            background: rgba(255, 200, 215, 0.12);
+            border: 1.5px solid #ffb7c5;
+            backdrop-filter: blur(10px);
+            padding: 12px 34px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1.15rem;
+            color: #ffdee7;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-btn:active {
+            transform: scale(0.96);
+            background: rgba(255, 190, 210, 0.3);
+        }
+
+        /* Hidden content setelah intro */
+        .hidden-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.9s;
+        }
+
+        .reveal-content {
+            display: block;
+            animation: fadeSlide 0.9s forwards;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Cards */
+        .memory-card {
+            background: rgba(15, 17, 27, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 48px;
+            padding: 1.8rem 1.5rem;
+            margin-bottom: 2.2rem;
+            border: 1px solid rgba(255, 190, 210, 0.25);
+            box-shadow: 0 20px 35px -9px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-head h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #ffc1d0;
+            border-bottom: 2px dashed #ff9eb3;
+            display: inline-block;
+            padding-bottom: 6px;
+        }
+
+        /* Gallery polaroid style */
+        .polaroid-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .polaroid {
+            background: #12141f;
+            border-radius: 24px;
+            padding: 12px 12px 18px;
+            transition: all 0.25s;
+            animation: appearUp 0.6s both;
+        }
+
+        @keyframes appearUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .photo-placeholder {
+            background: linear-gradient(145deg, #202231, #141623);
+            border-radius: 20px;
+            min-height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            color: #ffbace;
+            margin-bottom: 12px;
+        }
+
+        .caption {
+            font-size: 0.85rem;
+            text-align: center;
+            font-style: italic;
+            color: #cbcbe0;
+        }
+
+        .chat-bubble-mini {
+            background: #1e1f32;
+            border-radius: 28px;
+            padding: 10px 16px;
+            margin: 12px 0;
+            border-left: 3px solid #ffa5bc;
+            font-size: 0.9rem;
+        }
+
+        /* Letter digital */
+        .digital-letter {
+            background: #fffaf3;
+            color: #1c1b29;
+            border-radius: 32px;
+            padding: 2rem 1.6rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 1.55;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .digital-letter p {
+            margin-bottom: 1rem;
+        }
+
+        .letter-sign {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            margin-top: 1rem;
+        }
+
+        /* Love list */
+        .love-list {
+            list-style: none;
+        }
+
+        .love-list li {
+            background: rgba(255, 190, 210, 0.1);
+            margin: 12px 0;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 500;
+            backdrop-filter: blur(2px);
+            transform: translateX(0);
+            transition: 0.2s;
+        }
+
+        /* Final area */
+        .final-area {
+            text-align: center;
+            padding: 1.2rem 0;
+        }
+
+        .btn-last {
+            background: #ffb7c5;
+            border: none;
+            color: #201c2c;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            margin: 18px 0;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 6px 0 #8b4f60;
+        }
+
+        .btn-last:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #8b4f60;
+        }
+
+        .hidden-last {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* countdown + music player */
+        .countdown-badge {
+            background: #141626b3;
+            border-radius: 40px;
+            padding: 0.7rem;
+            text-align: center;
+            font-size: 0.85rem;
+            margin: 20px 0 0;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .music-mini {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 12, 22, 0.75);
+            backdrop-filter: blur(16px);
+            border-radius: 60px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 99;
+            border: 1px solid #ffabc0;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .star-hidden {
+            position: fixed;
+            bottom: 90px;
+            left: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            z-index: 99;
+            transition: 0.2s;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30%;
+            left: 20%;
+            background: #ffdfe8;
+            color: #a13054;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 200;
+            animation: fadeOutMsg 3s forwards;
+            pointer-events: none;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeOutMsg {
+            0% {
+                opacity: 1;
+                transform: scale(0.9);
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.68rem;
+            opacity: 0.45;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .site-container {
+                padding: 1rem 1rem 3rem;
+            }
+
+            .memory-card {
+                padding: 1.4rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="night-sky"></div>
+    <div class="stars-layer"></div>
+
+    <div class="site-container">
+        <!-- INTRO PAGE -->
+        <div id="introBlock" class="intro-section">
+            <div class="greeting-text">
+                hai sayang…<br>aku punya sesuatu buat kamu 🤍
+            </div>
+            <button class="intro-btn" id="enterIntroBtn">click me</button>
+        </div>
+
+        <!-- KONTEN UTAMA (semua bagian) -->
+        <div id="mainContent" class="hidden-content">
+            <!-- 1. OUR LITTLE STORY (foto & chat) -->
+            <div class="memory-card">
+                <div class="section-head">
+                    <h2>🤍 our little story 🤍</h2>
+                </div>
+                <div class="polaroid-stack" id="storyGallery"></div>
+            </div>
+
+            <!-- 2. DIGITAL LETTER -->
+            <div class="memory-card">
+                <div class="section-head">
+                    <h2>📜 untuk rumah paling nyaman</h2>
+                </div>
+                <div class="digital-letter" id="letterContainer"></div>
+            </div>
+
+            <!-- 3. THINGS I LOVE ABOUT YOU -->
+            <div class="memory-card">
+                <div class="section-head">
+                    <h2>✨ things i love about you</h2>
+                </div>
+                <ul class="love-list" id="loveListContainer"></ul>
+            </div>
+
+            <!-- 4. FINAL SECTION + COUNTDOWN -->
+            <div class="memory-card final-area">
+                <p style="font-size:1.2rem; font-family:'Dancing Script';">🌙 di dunia yang sejauh ini,<br>aku tetap
+                    senang karena dipertemukan sama kamu. 🤍</p>
+                <button class="btn-last" id="oneMoreThingBtn">one more thing…</button>
+                <div id="finalHiddenBox" class="hidden-last">
+                    <p style="font-size: 2rem; margin: 10px 0;">🤍 i love you, always 🤍</p>
+                    <div style="background:#1f2133; border-radius: 42px; padding: 1rem; margin-top: 12px;">
+                        <div style="font-size: 3rem;"><img src="b2.jpeg" alt="" width="100%"></div>
+                        <div style="font-size: 0.8rem;">“walau hanya lewat layar, kamu tetap jadi alasan aku tersenyum.”
+                        </div>
+                    </div>
+                </div>
+                <div class="countdown-badge" id="countdownArea"></div>
+            </div>
+            <footer>🤍 untuk kamu, yang membuat jarak terasa tak berarti 🤍</footer>
+        </div>
+    </div>
+
+    <!-- Music player mini -->
+    <div class="music-mini" id="musicToggleBtn">
+        <i class="fas fa-headphones" id="musicIcon"></i>
+        <span>Sempurna (Piano)</span>
+    </div>
+
+    <!-- Hidden message star -->
+    <div class="star-hidden" id="magicStar">
+        <i class="fas fa-star"></i>
+    </div>
+
+    <script>
+        (function () {
+            // ---------- DATA KENANGAN (foto & chat, disesuaikan suasana LDR) ----------
+            const storyMoments = [
+                {
+                    type: 'photo',
+                    img: 'poto.jpeg',
+                    caption: 'happy level up babe🤍',
+                    desc: 'saltingnya berapa hari ya pas dipap ini'
+                },
+                {
+                    type: 'photo',
+                    img: 'rand.jpeg',
+                    caption: 'orang yang selalu aku cari',
+                    desc: 'chat random dari kamu yang selalu bikin hari aku lebih baik'
+                },
+                {
+                    type: 'video',
+                    video: 'gitar1.mp4',
+                    caption: 'effort kecil yang besar buat aku',
+                    desc: 'aku seseneng itu waktu kamu mainin lagu buat aku'
+                },
+                {
+                    type: 'photo',
+                    img: 'call.jpeg',
+                    caption: 'hal kecil yang berarti',
+                    desc: 'call random yang selalu bikin hari aku lebih ringan'
+                },
+                {
+                    type: 'photo',
+                    img: 'bp.jpg',
+                    caption: 'tempat pulang favorit',
+                    desc: 'karena sekarang banyak cerita aku yang ujungnya ke kamu'
+                },
+                {
+                    type: 'photo',
+                    img: 'gtg.jpeg',
+                    caption: 'makasih ya udah lahir dan hadir di hidup aku.',
+                },
+                {
+                    type: 'photo',
+                    img: 'wpp.jpeg',
+                    caption: 'for your special day',
+                    desc: 'semoga kamu selalu dikelilingi banyak hal baik, sayang'
+                }
+            ];
+            function renderStory() {
+                console.log(storyMoments); // 👉 taro sini juga
+            }
+
+            // Love list items (hal kecil)
+            const loveItems = [
+                "cara kamu selalu nyari aku🤍",
+                "cara kamu nenangin aku walau lagi capek🌙",
+                "cara kamu dengerin semua cerita random aku🎧",
+                "cara kamu ngusahain hal kecil buat aku🫶🏻",
+                "cara kamu manggil aku yang bikin senyum sendiri🥺",
+                "cara kamu sabar ngadepin ovt aku💭",
+                "cara kamu selalu bikin aku ngerasa dicari📱",
+                "bahkan pas badmood pun aku tetep sayang kamu😵‍💫",
+                "dan cara kamu hadir di hidup aku sejauh ini✨"
+            ];
+
+            // Surat personal (LDR vibe)
+            const suratLong = `happy birthday sayanggg 🤍
+
+hari ini manusia favorit aku ulang tahun, yeyyy 🥹🎂
+
+jujur aku bingung mau nulis apa duluan, karena rasanya banyak banget yang mau aku sampein ke kamu. kita tuh lucu yaa, belum pernah ketemu, belum pernah jalan bareng, belum pernah foto berdua langsung, tapi kamu bisa bikin aku ngerasa sedeket itu sama seseorang.
+
+makasih yaa uda hadir di hidup aku. makasih juga karena dari sekian banyak orang, akhirnya aku dipertemuin sama kamu. aku selalu suka semua hal kecil tentang kamu, bahkan hal yang mungkin menurut kamu biasa aja. cara kamu ngomong, cara kamu bercanda, cara kamu nenangin aku pas lagi kenapa-kenapa, cara kamu selalu ngusahain aku walaupun kamu juga capek.
+
+dan jujur yaa, aku masih suka terharu sendiri kalo inget kamu pernah belajar gitar buat aku 😭 hal sesederhana itu aja bisa bikin aku ngerasa dihargain banget sama seseorang. belum lagi kamu tetep bantuin aku ngerjain tugas, nemenin aku, dengerin ocehan aku yang kadang nggak jelas. aku tuh seneng banget punya kamu.
+
+aku juga mau minta maaf yaa kalo selama ini aku masih sering overthinking, masih gampang sedih, gampang takut kehilangan kamu, atau kadang bikin kamu bingung sama mood aku sendiri. sebenernya semua itu cuma karena aku sayang banget sama kamu 😭 aku takut aja kalo suatu hari nanti semuanya berubah.
+
+tapi setelah sejauh ini jalan sama kamu, aku sadar kalo hubungan tuh bukan tentang siapa yang paling sempurna, tapi siapa yang tetep milih bertahan dan belajar satu sama lain. dan aku seneng karena sejauh ini kita masih sama-sama di sini.
+
+aku tau hubungan kita nggak gampang. kita jauh, beda kota, beda pulau, bahkan dunia kadang bikin semuanya terasa ribet. tapi anehnya, aku tetep nyaman sama kamu. tetep pengen cerita ke kamu duluan. tetep nyari kamu pas hari aku berantakan.
+
+makasih yaa uda jadi tempat paling nyaman buat aku sejauh ini 🤍
+
+semoga di umur kamu yang sekarang, semua hal baik dateng ke hidup kamu satu-satu. semoga kamu lebih bahagia, lebih tenang, lebih sehat, lebih disayang banyak orang, dan semoga semua yang kamu usahain bisa berhasil yaa sayanggg.
+
+aku juga berharap semoga hubungan kita bisa terus berjalan lebih baik dari hari ke hari. pelan-pelan aja, nggak usah sempurna, yang penting kita sama-sama usaha dan sama-sama tetep milih satu sama lain.
+
+dan selfish dikit boleh ga? aku masih mau ada di hidup kamu lamaaaa 😭🤍
+
+sekali lagi, happy birthday sayangkuuu.
+thank you for staying, thank you for loving me this far.
+
+i love u alwayss
+${getNickname()} 🤍`;
+
+            function getNickname() {
+                return "Bebeee"; // Ganti dengan nama panggilan kesayangan, misal 'Beeb'
+            }
+
+            // Render gallery polaroid + chat
+            function renderStory() {
+                const container = document.getElementById('storyGallery');
+                if (!container) return;
+                container.innerHTML = '';
+                storyMoments.forEach((item, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'polaroid';
+                    div.style.animationDelay = `${idx * 0.07}s`;
+                    if (item.type === 'video') {
+                        div.innerHTML = `
+        <div class="photo-placeholder">
+            <video width="100%" controls style="border-radius:10px;">
+                <source src="${item.video}" type="video/mp4">
+            </video>
+        </div>
+        <div class="caption">
+            <strong>${item.caption}</strong><br>${item.desc}
+        </div>
+        <div style="text-align:center; margin-top: 8px;">🎥</div>
+    `;
+                    }
+                    else if (item.type === 'photo') {
+                        div.innerHTML = `
+        <div class="photo-placeholder">
+            <img src="${item.img}" style="width:100%; border-radius:10px;">
+        </div>
+        <div class="caption">
+            <strong>${item.caption}</strong><br>${item.desc}
+        </div>
+        <div style="text-align:center; margin-top: 8px;">🤍</div>
+    `;
+                    }
+                    else {
+                        div.innerHTML = `
+                        <div class="chat-bubble-mini">
+                            <i class="fas fa-comment-dots" style="color:#ffa5bc; margin-right:6px;"></i> 
+                            <span>${item.text}</span>
+                            <div style="font-size: 0.7rem; margin-top: 6px;">— ${item.sender}</div>
+                        </div>
+                    `;
+                    }
+                    container.appendChild(div);
+                });
+            }
+
+            function renderLoveList() {
+                const loveContainer = document.getElementById('loveListContainer');
+                if (!loveContainer) return;
+                loveContainer.innerHTML = '';
+                loveItems.forEach((item, i) => {
+                    const li = document.createElement('li');
+                    li.textContent = `💖 ${item}`;
+                    li.style.animation = `appearUp 0.3s forwards`;
+                    li.style.animationDelay = `${i * 0.07}s`;
+                    li.style.opacity = '0';
+                    li.style.transform = 'translateX(0px)';
+                    loveContainer.appendChild(li);
+                    setTimeout(() => { li.style.opacity = '1'; }, i * 70);
+                });
+            }
+
+            function renderLetter() {
+                const letterBox = document.getElementById('letterContainer');
+                if (letterBox) {
+                    letterBox.innerHTML = `<p>${suratLong.replace(/\n/g, '<br>')}</p><div class="letter-sign">${getNickname()} ❤️</div>`;
+                }
+            }
+
+            // Countdown relationship (tanggal mulai serius)
+            function updateCountdown() {
+                const startDate = new Date(2026, 1, 18); // Ganti dengan anniversary bulan/tanggal awal hubungan kalian
+                const now = new Date();
+                const diffMs = now - startDate;
+                const daysCount = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                const countdownEl = document.getElementById('countdownArea');
+                if (countdownEl && daysCount >= 0) {
+                    countdownEl.innerHTML = `✨ ${daysCount} hari sejauh ini,<br> dan aku masih milih kamu.`;
+                } else {
+                    countdownEl.innerHTML = `✨ setiap hari bersamamu adalah hadiah ✨`;
+                }
+            }
+
+            // ----------------------- AUDIO (Lagu Sempurna piano via web audio sederhana) ----------
+            let audioCtx = null;
+            let isMusicOn = false;
+            let musicInterval = null;
+            let musicEnabled = false;
+
+            function initAudio() {
+                if (audioCtx) return;
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            // chord lembut (C major arpeggio) nuansa piano
+            function playSoftChord() {
+                if (!audioCtx || !musicEnabled || !isMusicOn) return;
+                const now = audioCtx.currentTime;
+                const notes = [261.63, 329.63, 392.00, 523.25, 392.00];
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.09, now + idx * 0.12);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.3);
+                    osc.start(now + idx * 0.12);
+                    osc.stop(now + 1.5);
+                });
+            }
+
+            function startMusicLoop() {
+                if (musicInterval) clearInterval(musicInterval);
+                isMusicOn = true;
+                musicInterval = setInterval(() => {
+                    if (isMusicOn && musicEnabled && audioCtx && audioCtx.state === 'running') {
+                        playSoftChord();
+                    }
+                }, 3900);
+            }
+
+            function stopMusic() {
+                if (musicInterval) clearInterval(musicInterval);
+                isMusicOn = false;
+            }
+
+            let userAllowAudio = false;
+            function enableMusicAndPlay() {
+                if (userAllowAudio) return;
+                initAudio();
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume().then(() => {
+                        userAllowAudio = true;
+                        musicEnabled = true;
+                        startMusicLoop();
+                        document.getElementById('musicIcon').style.color = '#ffb7c5';
+                    });
+                } else if (audioCtx && audioCtx.state === 'running') {
+                    userAllowAudio = true;
+                    musicEnabled = true;
+                    startMusicLoop();
+                    document.getElementById('musicIcon').style.color = '#ffb7c5';
+                } else {
+                    userAllowAudio = true;
+                    musicEnabled = true;
+                    startMusicLoop();
+                }
+            }
+
+            const audio = document.getElementById("bgMusic");
+
+            function toggleMusic() {
+                if (audio.paused) {
+                    audio.play();
+                    document.getElementById('musicIcon').style.color = '#ffb7c5';
+                } else {
+                    audio.pause();
+                    document.getElementById('musicIcon').style.color = '#aaa';
+                }
+            }
+
+            // UI Actions
+            const introDiv = document.getElementById('introBlock');
+            const mainContent = document.getElementById('mainContent');
+            const enterBtn = document.getElementById('enterIntroBtn');
+
+            enterBtn.addEventListener('click', () => {
+                introDiv.style.opacity = '0';
+                setTimeout(() => {
+                    introDiv.style.display = 'none';
+                    mainContent.classList.remove('hidden-content');
+                    mainContent.classList.add('reveal-content');
+                    document.getElementById("bgMusic").play(); window.scrollTo({ top: 0, behavior: 'smooth' });
+                    // voice note tambahan (simulasi voice note virtual - karena tidak ada file, kita tampilkan notifikasi)
+                    setTimeout(() => {
+                        showVoiceNoteToast();
+                    }, 1800);
+                }, 800);
+            });
+
+            // Voice note ucapan (simulasi personal karena user minta voice note)
+            function showVoiceNoteToast() {
+                const toast = document.createElement('div');
+                toast.className = 'toast-msg';
+                toast.innerHTML = '🎙️ <strong>voice note khusus:</strong> “Happy birthday babee, aku sayang banget sama kamu. Semoga kita cepet ketemu ya 🤍”';
+
+                document.body.appendChild(toast);
+
+                // 🔊 langsung dari JS
+                const audio = new Audio("ultah.mp3");
+                audio.play().catch(err => {
+                    console.log("gagal play:", err);
+                });
+
+                setTimeout(() => toast.remove(), 10000);
+            }
+
+            // One more thing final
+            const oneMoreBtn = document.getElementById('oneMoreThingBtn');
+            const finalHidden = document.getElementById('finalHiddenBox');
+            oneMoreBtn?.addEventListener('click', () => {
+                if (finalHidden) finalHidden.style.display = 'block';
+                if (navigator.vibrate) navigator.vibrate(80);
+                // efek bintang
+            });
+
+            // Hidden star message (bonus)
+            const starBtn = document.getElementById('magicStar');
+            starBtn?.addEventListener('click', () => {
+                const hiddenToast = document.createElement('div');
+                hiddenToast.className = 'toast-msg';
+                hiddenToast.innerHTML = '⭐ pst! bintang kecil ini selalu ingatkan aku sama kamu… I love you always, from afar. 🤍';
+                document.body.appendChild(hiddenToast);
+                setTimeout(() => hiddenToast.remove(), 3500);
+            });
+
+            // Music toggle
+            const musicBtn = document.getElementById('musicToggleBtn');
+            musicBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMusic();
+            });
+
+            // Observer list love
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, { threshold: 0.2 });
+            document.querySelectorAll('.love-list li').forEach(li => observer.observe(li));
+
+            // Render all
+            renderStory();
+            renderLoveList();
+            renderLetter();
+            updateCountdown();
+            setInterval(updateCountdown, 86400000);
+
+            // placeholder if device allows
+            console.log("❤️ memory box untuk hubungan kita");
+
+        })();
+    </script>
+    <audio id="bgMusic" loop>
+        <source src="gitar.mp3" type="audio/mpeg">
+    </audio>
+</body>
+
+</html>
